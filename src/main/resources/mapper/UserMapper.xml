@@ -1,0 +1,1174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cjj.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.cjj.domain.bean.User" >
+    <id column="USER_ID" property="userId" jdbcType="NUMERIC" />
+    <result column="DEPT_ID" property="deptId" jdbcType="NUMERIC" />
+    <result column="PURCHASER_ID" property="purchaserId" jdbcType="NUMERIC" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="NUMERIC" />
+    <result column="COST_CENTER_ID" property="costCenterId" jdbcType="NUMERIC" />
+    <result column="USER_LEVEL_ID" property="userLevelId" jdbcType="NUMERIC" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NO" property="employeeNo" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="NATIONALITY" property="nationality" jdbcType="NUMERIC" />
+    <result column="NAME_CN" property="nameCn" jdbcType="VARCHAR" />
+    <result column="PINYIN_FIRST" property="pinyinFirst" jdbcType="VARCHAR" />
+    <result column="PINYIN_FULL" property="pinyinFull" jdbcType="VARCHAR" />
+    <result column="NAME_EN_LAST" property="nameEnLast" jdbcType="VARCHAR" />
+    <result column="NAME_EN_MIDDLE" property="nameEnMiddle" jdbcType="VARCHAR" />
+    <result column="NAME_EN_FIRST" property="nameEnFirst" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="JOB" property="job" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="IDC_NAME" property="idcName" jdbcType="VARCHAR" />
+    <result column="IDC_TYPE" property="idcType" jdbcType="VARCHAR" />
+    <result column="IDC_NO" property="idcNo" jdbcType="VARCHAR" />
+    <result column="IDC_VALIDITY_DATE" property="idcValidityDate" jdbcType="VARCHAR" />
+    <result column="IDC_NAME2" property="idcName2" jdbcType="VARCHAR" />
+    <result column="IDC_TYPE2" property="idcType2" jdbcType="VARCHAR" />
+    <result column="IDC_NO2" property="idcNo2" jdbcType="VARCHAR" />
+    <result column="IDC_VALIDITY_DATE2" property="idcValidityDate2" jdbcType="VARCHAR" />
+    <result column="IDC_NAME3" property="idcName3" jdbcType="VARCHAR" />
+    <result column="IDC_TYPE3" property="idcType3" jdbcType="VARCHAR" />
+    <result column="IDC_NO3" property="idcNo3" jdbcType="VARCHAR" />
+    <result column="IDC_VALIDITY_DATE3" property="idcValidityDate3" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="VISIT_NUM" property="visitNum" jdbcType="NUMERIC" />
+    <result column="LAST_VISIT_TIME" property="lastVisitTime" jdbcType="TIMESTAMP" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="NUMERIC" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_USER" property="modifyUser" jdbcType="NUMERIC" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="LOGIN_FALSE_COUNT" property="loginFalseCount" jdbcType="NUMERIC" />
+    <result column="TEMP_PASSWORD" property="tempPassword" jdbcType="VARCHAR" />
+    <result column="TEMP_VALID_TIME" property="tempValidTime" jdbcType="TIMESTAMP" />
+    <result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR" />
+    <result column="TEMP_PAY_PASSWORD" property="tempPayPassword" jdbcType="VARCHAR" />
+    <result column="TEMP_VALID_PAY_TIME" property="tempValidPayTime" jdbcType="TIMESTAMP" />
+    <result column="INV_CODE" property="invCode" jdbcType="VARCHAR" />
+    <result column="INV_CREATE_TIME" property="invCreateTime" jdbcType="TIMESTAMP" />
+    <result column="IS_INV_USED" property="isInvUsed" jdbcType="DECIMAL" />
+    <result column="IDENTIFY_CODE" property="identifyCode" jdbcType="VARCHAR" />
+    <result column="IDENTIFY_CREATE_TIME" property="identifyCreateTime" jdbcType="TIMESTAMP" />
+    <result column="IDENTIFY_COUNT" property="identifyCount" jdbcType="DECIMAL" />
+    <result column="SUPERIOR_USER_ID" property="superiorUserId" jdbcType="NUMERIC" />
+    <result column="BANK_ID" property="bankId" jdbcType="VARCHAR" />
+    <result column="LAST_PREBOOK_TIME" property="lastPrebookTime" jdbcType="TIMESTAMP" />
+    <result column="AUTHORIZE" property="authorize" jdbcType="VARCHAR" />
+    <result column="ROLES" property="roles" jdbcType="VARCHAR" />
+    <result column="LEVEL_ID" property="levelId" jdbcType="NUMERIC" />
+    <result column="THIRD_EMP_NUMBER" property="thirdEmpNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, DEPT_ID, PURCHASER_ID, COMPANY_ID, COST_CENTER_ID, USER_LEVEL_ID, USERNAME, 
+    PASSWORD, EMPLOYEE_NO, SEX, BIRTHDAY, NATIONALITY, NAME_CN, PINYIN_FIRST, PINYIN_FULL, 
+    NAME_EN_LAST, NAME_EN_MIDDLE, NAME_EN_FIRST, PHONE, FAX, MOBILEPHONE, POSITION, JOB, 
+    EMAIL, IDC_NAME, IDC_TYPE, IDC_NO, IDC_VALIDITY_DATE, IDC_NAME2, IDC_TYPE2, IDC_NO2, 
+    IDC_VALIDITY_DATE2, IDC_NAME3, IDC_TYPE3, IDC_NO3, IDC_VALIDITY_DATE3, STATE, VISIT_NUM, 
+    LAST_VISIT_TIME, USER_TYPE, CREATE_USER, CREATE_TIME, MODIFY_USER, MODIFY_TIME, REMARK, 
+    LAST_LOGIN_TIME, LOGIN_FALSE_COUNT, TEMP_PASSWORD, TEMP_VALID_TIME, PAY_PASSWORD, 
+    TEMP_PAY_PASSWORD, TEMP_VALID_PAY_TIME, INV_CODE, INV_CREATE_TIME, IS_INV_USED, IDENTIFY_CODE, 
+    IDENTIFY_CREATE_TIME, IDENTIFY_COUNT, SUPERIOR_USER_ID, BANK_ID, LAST_PREBOOK_TIME, 
+    AUTHORIZE, ROLES, LEVEL_ID, THIRD_EMP_NUMBER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cjj.domain.bean.UserExample" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BASE_USER
+    where USER_ID = #{userId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_BASE_USER
+    where USER_ID = #{userId,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cjj.domain.bean.UserExample" >
+    delete from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cjj.domain.bean.User" >
+    <selectKey resultType="java.lang.Long" keyProperty="userId" order="BEFORE" >
+      select seq_user_userid.nextval from dual
+    </selectKey>
+    insert into T_BASE_USER (USER_ID, DEPT_ID, PURCHASER_ID, 
+      COMPANY_ID, COST_CENTER_ID, USER_LEVEL_ID, 
+      USERNAME, PASSWORD, EMPLOYEE_NO, 
+      SEX, BIRTHDAY, NATIONALITY, 
+      NAME_CN, PINYIN_FIRST, PINYIN_FULL, 
+      NAME_EN_LAST, NAME_EN_MIDDLE, NAME_EN_FIRST, 
+      PHONE, FAX, MOBILEPHONE, 
+      POSITION, JOB, EMAIL, 
+      IDC_NAME, IDC_TYPE, IDC_NO, 
+      IDC_VALIDITY_DATE, IDC_NAME2, IDC_TYPE2, 
+      IDC_NO2, IDC_VALIDITY_DATE2, IDC_NAME3, 
+      IDC_TYPE3, IDC_NO3, IDC_VALIDITY_DATE3, 
+      STATE, VISIT_NUM, LAST_VISIT_TIME, 
+      USER_TYPE, CREATE_USER, CREATE_TIME, 
+      MODIFY_USER, MODIFY_TIME, REMARK, 
+      LAST_LOGIN_TIME, LOGIN_FALSE_COUNT, TEMP_PASSWORD, 
+      TEMP_VALID_TIME, PAY_PASSWORD, TEMP_PAY_PASSWORD, 
+      TEMP_VALID_PAY_TIME, INV_CODE, INV_CREATE_TIME, 
+      IS_INV_USED, IDENTIFY_CODE, IDENTIFY_CREATE_TIME, 
+      IDENTIFY_COUNT, SUPERIOR_USER_ID, BANK_ID, 
+      LAST_PREBOOK_TIME, AUTHORIZE, ROLES, 
+      LEVEL_ID, THIRD_EMP_NUMBER)
+    values (#{userId,jdbcType=NUMERIC}, #{deptId,jdbcType=NUMERIC}, #{purchaserId,jdbcType=NUMERIC}, 
+      #{companyId,jdbcType=NUMERIC}, #{costCenterId,jdbcType=NUMERIC}, #{userLevelId,jdbcType=NUMERIC}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{employeeNo,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{nationality,jdbcType=NUMERIC}, 
+      #{nameCn,jdbcType=VARCHAR}, #{pinyinFirst,jdbcType=VARCHAR}, #{pinyinFull,jdbcType=VARCHAR}, 
+      #{nameEnLast,jdbcType=VARCHAR}, #{nameEnMiddle,jdbcType=VARCHAR}, #{nameEnFirst,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{idcName,jdbcType=VARCHAR}, #{idcType,jdbcType=VARCHAR}, #{idcNo,jdbcType=VARCHAR}, 
+      #{idcValidityDate,jdbcType=VARCHAR}, #{idcName2,jdbcType=VARCHAR}, #{idcType2,jdbcType=VARCHAR}, 
+      #{idcNo2,jdbcType=VARCHAR}, #{idcValidityDate2,jdbcType=VARCHAR}, #{idcName3,jdbcType=VARCHAR}, 
+      #{idcType3,jdbcType=VARCHAR}, #{idcNo3,jdbcType=VARCHAR}, #{idcValidityDate3,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{visitNum,jdbcType=NUMERIC}, #{lastVisitTime,jdbcType=TIMESTAMP}, 
+      #{userType,jdbcType=VARCHAR}, #{createUser,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyUser,jdbcType=NUMERIC}, #{modifyTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{loginFalseCount,jdbcType=NUMERIC}, #{tempPassword,jdbcType=VARCHAR}, 
+      #{tempValidTime,jdbcType=TIMESTAMP}, #{payPassword,jdbcType=VARCHAR}, #{tempPayPassword,jdbcType=VARCHAR}, 
+      #{tempValidPayTime,jdbcType=TIMESTAMP}, #{invCode,jdbcType=VARCHAR}, #{invCreateTime,jdbcType=TIMESTAMP}, 
+      #{isInvUsed,jdbcType=DECIMAL}, #{identifyCode,jdbcType=VARCHAR}, #{identifyCreateTime,jdbcType=TIMESTAMP}, 
+      #{identifyCount,jdbcType=DECIMAL}, #{superiorUserId,jdbcType=NUMERIC}, #{bankId,jdbcType=VARCHAR}, 
+      #{lastPrebookTime,jdbcType=TIMESTAMP}, #{authorize,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
+      #{levelId,jdbcType=NUMERIC}, #{thirdEmpNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjj.domain.bean.User" >
+    <selectKey resultType="java.lang.Long" keyProperty="userId" order="BEFORE" >
+      select seq_user_userid.nextval from dual
+    </selectKey>
+    insert into T_BASE_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      USER_ID,
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="purchaserId != null" >
+        PURCHASER_ID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="costCenterId != null" >
+        COST_CENTER_ID,
+      </if>
+      <if test="userLevelId != null" >
+        USER_LEVEL_ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="employeeNo != null" >
+        EMPLOYEE_NO,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY,
+      </if>
+      <if test="nameCn != null" >
+        NAME_CN,
+      </if>
+      <if test="pinyinFirst != null" >
+        PINYIN_FIRST,
+      </if>
+      <if test="pinyinFull != null" >
+        PINYIN_FULL,
+      </if>
+      <if test="nameEnLast != null" >
+        NAME_EN_LAST,
+      </if>
+      <if test="nameEnMiddle != null" >
+        NAME_EN_MIDDLE,
+      </if>
+      <if test="nameEnFirst != null" >
+        NAME_EN_FIRST,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="mobilephone != null" >
+        MOBILEPHONE,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="job != null" >
+        JOB,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="idcName != null" >
+        IDC_NAME,
+      </if>
+      <if test="idcType != null" >
+        IDC_TYPE,
+      </if>
+      <if test="idcNo != null" >
+        IDC_NO,
+      </if>
+      <if test="idcValidityDate != null" >
+        IDC_VALIDITY_DATE,
+      </if>
+      <if test="idcName2 != null" >
+        IDC_NAME2,
+      </if>
+      <if test="idcType2 != null" >
+        IDC_TYPE2,
+      </if>
+      <if test="idcNo2 != null" >
+        IDC_NO2,
+      </if>
+      <if test="idcValidityDate2 != null" >
+        IDC_VALIDITY_DATE2,
+      </if>
+      <if test="idcName3 != null" >
+        IDC_NAME3,
+      </if>
+      <if test="idcType3 != null" >
+        IDC_TYPE3,
+      </if>
+      <if test="idcNo3 != null" >
+        IDC_NO3,
+      </if>
+      <if test="idcValidityDate3 != null" >
+        IDC_VALIDITY_DATE3,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="visitNum != null" >
+        VISIT_NUM,
+      </if>
+      <if test="lastVisitTime != null" >
+        LAST_VISIT_TIME,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME,
+      </if>
+      <if test="loginFalseCount != null" >
+        LOGIN_FALSE_COUNT,
+      </if>
+      <if test="tempPassword != null" >
+        TEMP_PASSWORD,
+      </if>
+      <if test="tempValidTime != null" >
+        TEMP_VALID_TIME,
+      </if>
+      <if test="payPassword != null" >
+        PAY_PASSWORD,
+      </if>
+      <if test="tempPayPassword != null" >
+        TEMP_PAY_PASSWORD,
+      </if>
+      <if test="tempValidPayTime != null" >
+        TEMP_VALID_PAY_TIME,
+      </if>
+      <if test="invCode != null" >
+        INV_CODE,
+      </if>
+      <if test="invCreateTime != null" >
+        INV_CREATE_TIME,
+      </if>
+      <if test="isInvUsed != null" >
+        IS_INV_USED,
+      </if>
+      <if test="identifyCode != null" >
+        IDENTIFY_CODE,
+      </if>
+      <if test="identifyCreateTime != null" >
+        IDENTIFY_CREATE_TIME,
+      </if>
+      <if test="identifyCount != null" >
+        IDENTIFY_COUNT,
+      </if>
+      <if test="superiorUserId != null" >
+        SUPERIOR_USER_ID,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="lastPrebookTime != null" >
+        LAST_PREBOOK_TIME,
+      </if>
+      <if test="authorize != null" >
+        AUTHORIZE,
+      </if>
+      <if test="roles != null" >
+        ROLES,
+      </if>
+      <if test="levelId != null" >
+        LEVEL_ID,
+      </if>
+      <if test="thirdEmpNumber != null" >
+        THIRD_EMP_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{userId,jdbcType=NUMERIC},
+      <if test="deptId != null" >
+        #{deptId,jdbcType=NUMERIC},
+      </if>
+      <if test="purchaserId != null" >
+        #{purchaserId,jdbcType=NUMERIC},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=NUMERIC},
+      </if>
+      <if test="costCenterId != null" >
+        #{costCenterId,jdbcType=NUMERIC},
+      </if>
+      <if test="userLevelId != null" >
+        #{userLevelId,jdbcType=NUMERIC},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null" >
+        #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=NUMERIC},
+      </if>
+      <if test="nameCn != null" >
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinFirst != null" >
+        #{pinyinFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinFull != null" >
+        #{pinyinFull,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnLast != null" >
+        #{nameEnLast,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnMiddle != null" >
+        #{nameEnMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnFirst != null" >
+        #{nameEnFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName != null" >
+        #{idcName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType != null" >
+        #{idcType,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo != null" >
+        #{idcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate != null" >
+        #{idcValidityDate,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName2 != null" >
+        #{idcName2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType2 != null" >
+        #{idcType2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo2 != null" >
+        #{idcNo2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate2 != null" >
+        #{idcValidityDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName3 != null" >
+        #{idcName3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType3 != null" >
+        #{idcType3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo3 != null" >
+        #{idcNo3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate3 != null" >
+        #{idcValidityDate3,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="visitNum != null" >
+        #{visitNum,jdbcType=NUMERIC},
+      </if>
+      <if test="lastVisitTime != null" >
+        #{lastVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=NUMERIC},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginFalseCount != null" >
+        #{loginFalseCount,jdbcType=NUMERIC},
+      </if>
+      <if test="tempPassword != null" >
+        #{tempPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempValidTime != null" >
+        #{tempValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payPassword != null" >
+        #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempPayPassword != null" >
+        #{tempPayPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempValidPayTime != null" >
+        #{tempValidPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invCode != null" >
+        #{invCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invCreateTime != null" >
+        #{invCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isInvUsed != null" >
+        #{isInvUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="identifyCode != null" >
+        #{identifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyCreateTime != null" >
+        #{identifyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identifyCount != null" >
+        #{identifyCount,jdbcType=DECIMAL},
+      </if>
+      <if test="superiorUserId != null" >
+        #{superiorUserId,jdbcType=NUMERIC},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPrebookTime != null" >
+        #{lastPrebookTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authorize != null" >
+        #{authorize,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="levelId != null" >
+        #{levelId,jdbcType=NUMERIC},
+      </if>
+      <if test="thirdEmpNumber != null" >
+        #{thirdEmpNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cjj.domain.bean.UserExample" resultType="java.lang.Integer" >
+    select count(*) from T_BASE_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_BASE_USER
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.purchaserId != null" >
+        PURCHASER_ID = #{record.purchaserId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.companyId != null" >
+        COMPANY_ID = #{record.companyId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.costCenterId != null" >
+        COST_CENTER_ID = #{record.costCenterId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.userLevelId != null" >
+        USER_LEVEL_ID = #{record.userLevelId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNo != null" >
+        EMPLOYEE_NO = #{record.employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nationality != null" >
+        NATIONALITY = #{record.nationality,jdbcType=NUMERIC},
+      </if>
+      <if test="record.nameCn != null" >
+        NAME_CN = #{record.nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinyinFirst != null" >
+        PINYIN_FIRST = #{record.pinyinFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinyinFull != null" >
+        PINYIN_FULL = #{record.pinyinFull,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameEnLast != null" >
+        NAME_EN_LAST = #{record.nameEnLast,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameEnMiddle != null" >
+        NAME_EN_MIDDLE = #{record.nameEnMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameEnFirst != null" >
+        NAME_EN_FIRST = #{record.nameEnFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        JOB = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcName != null" >
+        IDC_NAME = #{record.idcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcType != null" >
+        IDC_TYPE = #{record.idcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcNo != null" >
+        IDC_NO = #{record.idcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcValidityDate != null" >
+        IDC_VALIDITY_DATE = #{record.idcValidityDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcName2 != null" >
+        IDC_NAME2 = #{record.idcName2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcType2 != null" >
+        IDC_TYPE2 = #{record.idcType2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcNo2 != null" >
+        IDC_NO2 = #{record.idcNo2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcValidityDate2 != null" >
+        IDC_VALIDITY_DATE2 = #{record.idcValidityDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcName3 != null" >
+        IDC_NAME3 = #{record.idcName3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcType3 != null" >
+        IDC_TYPE3 = #{record.idcType3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcNo3 != null" >
+        IDC_NO3 = #{record.idcNo3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcValidityDate3 != null" >
+        IDC_VALIDITY_DATE3 = #{record.idcValidityDate3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitNum != null" >
+        VISIT_NUM = #{record.visitNum,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lastVisitTime != null" >
+        LAST_VISIT_TIME = #{record.lastVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userType != null" >
+        USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=NUMERIC},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyUser != null" >
+        MODIFY_USER = #{record.modifyUser,jdbcType=NUMERIC},
+      </if>
+      <if test="record.modifyTime != null" >
+        MODIFY_TIME = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginFalseCount != null" >
+        LOGIN_FALSE_COUNT = #{record.loginFalseCount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.tempPassword != null" >
+        TEMP_PASSWORD = #{record.tempPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempValidTime != null" >
+        TEMP_VALID_TIME = #{record.tempValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payPassword != null" >
+        PAY_PASSWORD = #{record.payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempPayPassword != null" >
+        TEMP_PAY_PASSWORD = #{record.tempPayPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempValidPayTime != null" >
+        TEMP_VALID_PAY_TIME = #{record.tempValidPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invCode != null" >
+        INV_CODE = #{record.invCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invCreateTime != null" >
+        INV_CREATE_TIME = #{record.invCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isInvUsed != null" >
+        IS_INV_USED = #{record.isInvUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="record.identifyCode != null" >
+        IDENTIFY_CODE = #{record.identifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identifyCreateTime != null" >
+        IDENTIFY_CREATE_TIME = #{record.identifyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.identifyCount != null" >
+        IDENTIFY_COUNT = #{record.identifyCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.superiorUserId != null" >
+        SUPERIOR_USER_ID = #{record.superiorUserId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.bankId != null" >
+        BANK_ID = #{record.bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastPrebookTime != null" >
+        LAST_PREBOOK_TIME = #{record.lastPrebookTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authorize != null" >
+        AUTHORIZE = #{record.authorize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roles != null" >
+        ROLES = #{record.roles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelId != null" >
+        LEVEL_ID = #{record.levelId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.thirdEmpNumber != null" >
+        THIRD_EMP_NUMBER = #{record.thirdEmpNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_BASE_USER
+    set USER_ID = #{record.userId,jdbcType=NUMERIC},
+      DEPT_ID = #{record.deptId,jdbcType=NUMERIC},
+      PURCHASER_ID = #{record.purchaserId,jdbcType=NUMERIC},
+      COMPANY_ID = #{record.companyId,jdbcType=NUMERIC},
+      COST_CENTER_ID = #{record.costCenterId,jdbcType=NUMERIC},
+      USER_LEVEL_ID = #{record.userLevelId,jdbcType=NUMERIC},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      EMPLOYEE_NO = #{record.employeeNo,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=VARCHAR},
+      BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+      NATIONALITY = #{record.nationality,jdbcType=NUMERIC},
+      NAME_CN = #{record.nameCn,jdbcType=VARCHAR},
+      PINYIN_FIRST = #{record.pinyinFirst,jdbcType=VARCHAR},
+      PINYIN_FULL = #{record.pinyinFull,jdbcType=VARCHAR},
+      NAME_EN_LAST = #{record.nameEnLast,jdbcType=VARCHAR},
+      NAME_EN_MIDDLE = #{record.nameEnMiddle,jdbcType=VARCHAR},
+      NAME_EN_FIRST = #{record.nameEnFirst,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      JOB = #{record.job,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      IDC_NAME = #{record.idcName,jdbcType=VARCHAR},
+      IDC_TYPE = #{record.idcType,jdbcType=VARCHAR},
+      IDC_NO = #{record.idcNo,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE = #{record.idcValidityDate,jdbcType=VARCHAR},
+      IDC_NAME2 = #{record.idcName2,jdbcType=VARCHAR},
+      IDC_TYPE2 = #{record.idcType2,jdbcType=VARCHAR},
+      IDC_NO2 = #{record.idcNo2,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE2 = #{record.idcValidityDate2,jdbcType=VARCHAR},
+      IDC_NAME3 = #{record.idcName3,jdbcType=VARCHAR},
+      IDC_TYPE3 = #{record.idcType3,jdbcType=VARCHAR},
+      IDC_NO3 = #{record.idcNo3,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE3 = #{record.idcValidityDate3,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      VISIT_NUM = #{record.visitNum,jdbcType=NUMERIC},
+      LAST_VISIT_TIME = #{record.lastVisitTime,jdbcType=TIMESTAMP},
+      USER_TYPE = #{record.userType,jdbcType=VARCHAR},
+      CREATE_USER = #{record.createUser,jdbcType=NUMERIC},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{record.modifyUser,jdbcType=NUMERIC},
+      MODIFY_TIME = #{record.modifyTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      LOGIN_FALSE_COUNT = #{record.loginFalseCount,jdbcType=NUMERIC},
+      TEMP_PASSWORD = #{record.tempPassword,jdbcType=VARCHAR},
+      TEMP_VALID_TIME = #{record.tempValidTime,jdbcType=TIMESTAMP},
+      PAY_PASSWORD = #{record.payPassword,jdbcType=VARCHAR},
+      TEMP_PAY_PASSWORD = #{record.tempPayPassword,jdbcType=VARCHAR},
+      TEMP_VALID_PAY_TIME = #{record.tempValidPayTime,jdbcType=TIMESTAMP},
+      INV_CODE = #{record.invCode,jdbcType=VARCHAR},
+      INV_CREATE_TIME = #{record.invCreateTime,jdbcType=TIMESTAMP},
+      IS_INV_USED = #{record.isInvUsed,jdbcType=DECIMAL},
+      IDENTIFY_CODE = #{record.identifyCode,jdbcType=VARCHAR},
+      IDENTIFY_CREATE_TIME = #{record.identifyCreateTime,jdbcType=TIMESTAMP},
+      IDENTIFY_COUNT = #{record.identifyCount,jdbcType=DECIMAL},
+      SUPERIOR_USER_ID = #{record.superiorUserId,jdbcType=NUMERIC},
+      BANK_ID = #{record.bankId,jdbcType=VARCHAR},
+      LAST_PREBOOK_TIME = #{record.lastPrebookTime,jdbcType=TIMESTAMP},
+      AUTHORIZE = #{record.authorize,jdbcType=VARCHAR},
+      ROLES = #{record.roles,jdbcType=VARCHAR},
+      LEVEL_ID = #{record.levelId,jdbcType=NUMERIC},
+      THIRD_EMP_NUMBER = #{record.thirdEmpNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjj.domain.bean.User" >
+    update T_BASE_USER
+    <set >
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=NUMERIC},
+      </if>
+      <if test="purchaserId != null" >
+        PURCHASER_ID = #{purchaserId,jdbcType=NUMERIC},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=NUMERIC},
+      </if>
+      <if test="costCenterId != null" >
+        COST_CENTER_ID = #{costCenterId,jdbcType=NUMERIC},
+      </if>
+      <if test="userLevelId != null" >
+        USER_LEVEL_ID = #{userLevelId,jdbcType=NUMERIC},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null" >
+        EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY = #{nationality,jdbcType=NUMERIC},
+      </if>
+      <if test="nameCn != null" >
+        NAME_CN = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinFirst != null" >
+        PINYIN_FIRST = #{pinyinFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyinFull != null" >
+        PINYIN_FULL = #{pinyinFull,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnLast != null" >
+        NAME_EN_LAST = #{nameEnLast,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnMiddle != null" >
+        NAME_EN_MIDDLE = #{nameEnMiddle,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEnFirst != null" >
+        NAME_EN_FIRST = #{nameEnFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephone != null" >
+        MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName != null" >
+        IDC_NAME = #{idcName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType != null" >
+        IDC_TYPE = #{idcType,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo != null" >
+        IDC_NO = #{idcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate != null" >
+        IDC_VALIDITY_DATE = #{idcValidityDate,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName2 != null" >
+        IDC_NAME2 = #{idcName2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType2 != null" >
+        IDC_TYPE2 = #{idcType2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo2 != null" >
+        IDC_NO2 = #{idcNo2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate2 != null" >
+        IDC_VALIDITY_DATE2 = #{idcValidityDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcName3 != null" >
+        IDC_NAME3 = #{idcName3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcType3 != null" >
+        IDC_TYPE3 = #{idcType3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcNo3 != null" >
+        IDC_NO3 = #{idcNo3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcValidityDate3 != null" >
+        IDC_VALIDITY_DATE3 = #{idcValidityDate3,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="visitNum != null" >
+        VISIT_NUM = #{visitNum,jdbcType=NUMERIC},
+      </if>
+      <if test="lastVisitTime != null" >
+        LAST_VISIT_TIME = #{lastVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER = #{modifyUser,jdbcType=NUMERIC},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginFalseCount != null" >
+        LOGIN_FALSE_COUNT = #{loginFalseCount,jdbcType=NUMERIC},
+      </if>
+      <if test="tempPassword != null" >
+        TEMP_PASSWORD = #{tempPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempValidTime != null" >
+        TEMP_VALID_TIME = #{tempValidTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payPassword != null" >
+        PAY_PASSWORD = #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempPayPassword != null" >
+        TEMP_PAY_PASSWORD = #{tempPayPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tempValidPayTime != null" >
+        TEMP_VALID_PAY_TIME = #{tempValidPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invCode != null" >
+        INV_CODE = #{invCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invCreateTime != null" >
+        INV_CREATE_TIME = #{invCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isInvUsed != null" >
+        IS_INV_USED = #{isInvUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="identifyCode != null" >
+        IDENTIFY_CODE = #{identifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyCreateTime != null" >
+        IDENTIFY_CREATE_TIME = #{identifyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identifyCount != null" >
+        IDENTIFY_COUNT = #{identifyCount,jdbcType=DECIMAL},
+      </if>
+      <if test="superiorUserId != null" >
+        SUPERIOR_USER_ID = #{superiorUserId,jdbcType=NUMERIC},
+      </if>
+      <if test="bankId != null" >
+        BANK_ID = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPrebookTime != null" >
+        LAST_PREBOOK_TIME = #{lastPrebookTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authorize != null" >
+        AUTHORIZE = #{authorize,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        ROLES = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="levelId != null" >
+        LEVEL_ID = #{levelId,jdbcType=NUMERIC},
+      </if>
+      <if test="thirdEmpNumber != null" >
+        THIRD_EMP_NUMBER = #{thirdEmpNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjj.domain.bean.User" >
+    update T_BASE_USER
+    set DEPT_ID = #{deptId,jdbcType=NUMERIC},
+      PURCHASER_ID = #{purchaserId,jdbcType=NUMERIC},
+      COMPANY_ID = #{companyId,jdbcType=NUMERIC},
+      COST_CENTER_ID = #{costCenterId,jdbcType=NUMERIC},
+      USER_LEVEL_ID = #{userLevelId,jdbcType=NUMERIC},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      NATIONALITY = #{nationality,jdbcType=NUMERIC},
+      NAME_CN = #{nameCn,jdbcType=VARCHAR},
+      PINYIN_FIRST = #{pinyinFirst,jdbcType=VARCHAR},
+      PINYIN_FULL = #{pinyinFull,jdbcType=VARCHAR},
+      NAME_EN_LAST = #{nameEnLast,jdbcType=VARCHAR},
+      NAME_EN_MIDDLE = #{nameEnMiddle,jdbcType=VARCHAR},
+      NAME_EN_FIRST = #{nameEnFirst,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      IDC_NAME = #{idcName,jdbcType=VARCHAR},
+      IDC_TYPE = #{idcType,jdbcType=VARCHAR},
+      IDC_NO = #{idcNo,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE = #{idcValidityDate,jdbcType=VARCHAR},
+      IDC_NAME2 = #{idcName2,jdbcType=VARCHAR},
+      IDC_TYPE2 = #{idcType2,jdbcType=VARCHAR},
+      IDC_NO2 = #{idcNo2,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE2 = #{idcValidityDate2,jdbcType=VARCHAR},
+      IDC_NAME3 = #{idcName3,jdbcType=VARCHAR},
+      IDC_TYPE3 = #{idcType3,jdbcType=VARCHAR},
+      IDC_NO3 = #{idcNo3,jdbcType=VARCHAR},
+      IDC_VALIDITY_DATE3 = #{idcValidityDate3,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      VISIT_NUM = #{visitNum,jdbcType=NUMERIC},
+      LAST_VISIT_TIME = #{lastVisitTime,jdbcType=TIMESTAMP},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=NUMERIC},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_USER = #{modifyUser,jdbcType=NUMERIC},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      LOGIN_FALSE_COUNT = #{loginFalseCount,jdbcType=NUMERIC},
+      TEMP_PASSWORD = #{tempPassword,jdbcType=VARCHAR},
+      TEMP_VALID_TIME = #{tempValidTime,jdbcType=TIMESTAMP},
+      PAY_PASSWORD = #{payPassword,jdbcType=VARCHAR},
+      TEMP_PAY_PASSWORD = #{tempPayPassword,jdbcType=VARCHAR},
+      TEMP_VALID_PAY_TIME = #{tempValidPayTime,jdbcType=TIMESTAMP},
+      INV_CODE = #{invCode,jdbcType=VARCHAR},
+      INV_CREATE_TIME = #{invCreateTime,jdbcType=TIMESTAMP},
+      IS_INV_USED = #{isInvUsed,jdbcType=DECIMAL},
+      IDENTIFY_CODE = #{identifyCode,jdbcType=VARCHAR},
+      IDENTIFY_CREATE_TIME = #{identifyCreateTime,jdbcType=TIMESTAMP},
+      IDENTIFY_COUNT = #{identifyCount,jdbcType=DECIMAL},
+      SUPERIOR_USER_ID = #{superiorUserId,jdbcType=NUMERIC},
+      BANK_ID = #{bankId,jdbcType=VARCHAR},
+      LAST_PREBOOK_TIME = #{lastPrebookTime,jdbcType=TIMESTAMP},
+      AUTHORIZE = #{authorize,jdbcType=VARCHAR},
+      ROLES = #{roles,jdbcType=VARCHAR},
+      LEVEL_ID = #{levelId,jdbcType=NUMERIC},
+      THIRD_EMP_NUMBER = #{thirdEmpNumber,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=NUMERIC}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+</mapper>

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@180.97.80.177:1621:traveldb
+    username: jike
+    password: jike17712613261
+    type: com.zaxxer.hikari.HikariDataSource
+
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  check-config-location: true
+  type-aliases-package: com.cjj.domain.*
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+
